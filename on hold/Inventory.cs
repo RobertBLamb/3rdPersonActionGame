@@ -35,11 +35,22 @@ public class Inventory : MonoBehaviour
 
     public bool Add(Item item)
     {
+        if(item is Projectiles)
+        {
+            //Debug.Log("got in there");
+        }
+
         if(!item.defaultItem)
         {
-            if(items.Count >=inventoryLimit)
+            if(items.Contains(item) && item.stackable)
             {
-                Debug.Log("too many items");
+                items[items.IndexOf(item)].itemCount += item.itemCount;
+                Debug.Log(items[items.IndexOf(item)].itemCount);
+            }
+
+            if (items.Count >= inventoryLimit)
+            {
+                //Debug.Log("too many items");
                 return false;
             }
             items.Add(item);

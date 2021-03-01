@@ -10,6 +10,8 @@ public class Item : ScriptableObject
     public string itemName = "New Item";
     public Sprite icon = null;
     public bool defaultItem = false;
+    public bool stackable = false;
+    public int itemCount = 1;
 
     public virtual void Use()
     {

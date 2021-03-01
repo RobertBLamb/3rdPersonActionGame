@@ -7,5 +7,5 @@ using UnityEngine;
 public class Projectiles : Item
 {
     public LayerMask canHit;
-    public int ammoCount;
+    //public int ammoCount;
 }

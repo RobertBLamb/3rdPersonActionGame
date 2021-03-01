@@ -18,7 +18,11 @@ public class AimDownSights : MonoBehaviour
     public bool shotUsed;
     float triggerCutOff = .09f;
     public float aimMovespeed = 5f;
-    float zoomTime = .5f;
+
+    //temp for shooting
+    public int ammo;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +58,18 @@ public class AimDownSights : MonoBehaviour
             a = StartCoroutine(Zoom(normalFov));
         }//letting go of LT, reset cam zoom and MS
 
-        if(aiming && Input.GetAxisRaw("Shoot")>triggerCutOff && !shotUsed)
+        if(aiming && Input.GetAxisRaw("Shoot")>triggerCutOff && !shotUsed && ammo>0)
         {
-            Debug.Log("bang bang bang");
+            ammo--;
+            //Debug.Log("bang bang bang");
+            shotUsed = true;
+            reticle.Shoot();
+            
+            //add function for trying to shoot
+        }
+        else if (aiming && Input.GetAxisRaw("Shoot") > triggerCutOff && !shotUsed && ammo <= 0)
+        {
+            Debug.Log("no ammo sadge");
             shotUsed = true;
             //add function for trying to shoot
         }
