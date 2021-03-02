@@ -10,7 +10,7 @@ public class Interactable : MonoBehaviour
 
     public Transform player;
 
-    bool pickedUp;
+    //bool pickedUp;
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class Interactable : MonoBehaviour
         if(distance<=pickupRadius && Input.GetButtonDown("Interact"))
         {
             Debug.Log("touching");
-            pickedUp = true;
+            //pickedUp = true;
             Pickup();
             //Interact();
         }

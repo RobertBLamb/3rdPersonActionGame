@@ -58,7 +58,6 @@ public class Reticle : MonoBehaviour
         //likely part of the issue, probably called in the wrong spot
         currentSize = maxSize;
         reticle.SetActive(on);
-
     }
 
     public void Shoot()
@@ -76,7 +75,10 @@ public class Reticle : MonoBehaviour
 
         if(Physics.Raycast(temp.position, ray.direction, out hit, 10f, maskMask))
         {
-            Debug.Log(hit.transform.name);
+            if(hit.transform.GetComponent<EnemyHitStun>())
+            {
+                hit.transform.GetComponent<EnemyHitStun>().StartHitstun();
+            }
         }
         //Debug.DrawRay(temp.position, ray.direction * 15f, Color.red, 3f);
         #endregion
