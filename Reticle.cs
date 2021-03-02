@@ -22,6 +22,8 @@ public class Reticle : MonoBehaviour
     float screenX;
     float screenY;
 
+    public int tempDmg;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,12 +74,13 @@ public class Reticle : MonoBehaviour
         #region fire shot
         Ray ray = cam.ViewportPointToRay(new Vector2(horzOffset, vertOffset));
         RaycastHit hit;
-
-        if(Physics.Raycast(temp.position, ray.direction, out hit, 10f, maskMask))
+        Debug.DrawRay(temp.position, ray.direction * 15f, Color.red, 5f);
+        if(Physics.Raycast(temp.position, ray.direction, out hit, 15f, maskMask))
         {
-            if(hit.transform.GetComponent<EnemyHitStun>())
+            Debug.Log(hit.transform);
+            if(hit.transform.GetComponent<EnemyDamageManager>())
             {
-                hit.transform.GetComponent<EnemyHitStun>().StartHitstun();
+                hit.transform.GetComponent<EnemyDamageManager>().EnemyHit(tempDmg);
             }
         }
         //Debug.DrawRay(temp.position, ray.direction * 15f, Color.red, 3f);
