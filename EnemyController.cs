@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
 
     NavMeshPath path;
     public float waitTime;
+
+    public Animator anime;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class EnemyController : MonoBehaviour
         patrolPoints = new Vector3[numPatrolPoints];
 
         path = new NavMeshPath();
+        anime.SetBool("Walk Forward", true);
     }
 
     // Update is called once per frame
@@ -39,12 +42,16 @@ public class EnemyController : MonoBehaviour
 
         if(distance<=lookRadius)
         {
+            anime.SetBool("Walk Forward", false);
+            anime.SetBool("Run Forward", true);
             trackingPlayer = true;
             agent.SetDestination(player.position);
             patrolSet = false;
         }
         else
         {
+            anime.SetBool("Run Forward", false); 
+            anime.SetBool("Walk Forward", true);
             trackingPlayer = false;
         }
         #endregion

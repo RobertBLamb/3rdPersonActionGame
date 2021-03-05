@@ -60,6 +60,7 @@ public class AimDownSights : MonoBehaviour
 
         if(aiming && Input.GetAxisRaw("Shoot")>triggerCutOff && !shotUsed && ammo>0)
         {
+            thirdPersonMovement.anime.SetTrigger("Shoot");
             ammo--;
             //Debug.Log("bang bang bang");
             shotUsed = true;

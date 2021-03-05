@@ -33,6 +33,8 @@ public class DodgeSpecial : MonoBehaviour
         thirdPersonMovement.usingSpecial = true;
         thirdPersonMovement.speed = dodgeSpeed;
 
+        thirdPersonMovement.anime.SetTrigger("Dodge");
+
         while(dodgeDuration>0)
         {
             dodgeDuration -= Time.deltaTime;

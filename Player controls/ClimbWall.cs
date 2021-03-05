@@ -14,7 +14,7 @@ public class ClimbWall : MonoBehaviour
     public float wallClimbAngle = 20;
 
     float rightAngle = 90;
-    float climbSpeed = 15;
+    float climbSpeed = 10;
 
     float moveForwardtime=.1f;
     float moveForwardtimeReset;
@@ -32,6 +32,7 @@ public class ClimbWall : MonoBehaviour
         //Add ground check?
         if(Raycast(wallHighEnough) && !Raycast(wallTooHigh) && !climbing)
         {
+            
             //TODO: optimize code later, maybe make method
             if (Physics.Raycast(wallHighEnough.position, wallHighEnough.forward, out hit, castDist, isClimbable))
             {
@@ -45,6 +46,9 @@ public class ClimbWall : MonoBehaviour
                 }
             }
         }
+
+        Debug.DrawRay(wallHighEnough.position, wallHighEnough.forward, Color.green);
+        Debug.DrawRay(wallTooHigh.position, wallTooHigh.forward, Color.red);
     }
 
     private void OnDrawGizmosSelected()
@@ -66,6 +70,14 @@ public class ClimbWall : MonoBehaviour
 
     public IEnumerator Climbing()
     {
+        thirdPersonMovement.anime.SetTrigger("Climb");
+        float i = .9f;
+        while(i>0)
+        {
+            i -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
         climbing = true;
         thirdPersonMovement.animationLocked = true;
         while(hit.collider.bounds.max.y>thirdPersonMovement.controller.bounds.min.y)

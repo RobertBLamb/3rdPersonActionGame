@@ -15,6 +15,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float speed;
     [HideInInspector]
     public bool animationLocked;
+    public Animator anime;
 
     #region Done Modifying
 
@@ -75,6 +76,11 @@ public class ThirdPersonMovement : MonoBehaviour
                 if (direction.magnitude >= 0.1f)
                 {
                     MovePlayer();
+                    anime.SetBool("Walking", true);
+                }
+                else
+                {
+                    anime.SetBool("Walking", false);
                 }
             }
 
@@ -86,12 +92,14 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         speed = runSpeed;
         running = true;
+        anime.SetBool("Running", true);
     }
 
     public void StopRunning()
     {
         speed = walkSpeed;
         running = false;
+        anime.SetBool("Running", false);
     }
 
     void ApplyGravity()
@@ -143,7 +151,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void ResetMovement()
     {
-        if(aimDownSights.aiming)
+        anime.SetBool("Running", false);
+        if (aimDownSights.aiming)
         {
             speed = aimDownSights.aimMovespeed;
             //canRun = false;
