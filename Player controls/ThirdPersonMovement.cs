@@ -46,7 +46,7 @@ public class ThirdPersonMovement : MonoBehaviour
         speed = walkSpeed;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(!animationLocked)
         {

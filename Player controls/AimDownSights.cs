@@ -19,6 +19,8 @@ public class AimDownSights : MonoBehaviour
     float triggerCutOff = .09f;
     public float aimMovespeed = 5f;
 
+    public ParticleSystem particles;
+
     //temp for shooting
     public int ammo;
 
@@ -40,6 +42,7 @@ public class AimDownSights : MonoBehaviour
             aiming = true;
             thirdPersonMovement.speed = aimMovespeed;
             thirdPersonMovement.canRun = false;
+            thirdPersonMovement.anime.SetBool("Running", false);
             if(a!=null)
             {
                 StopCoroutine(a);
@@ -61,6 +64,7 @@ public class AimDownSights : MonoBehaviour
         if(aiming && Input.GetAxisRaw("Shoot")>triggerCutOff && !shotUsed && ammo>0)
         {
             thirdPersonMovement.anime.SetTrigger("Shoot");
+            particles.Play();
             ammo--;
             //Debug.Log("bang bang bang");
             shotUsed = true;

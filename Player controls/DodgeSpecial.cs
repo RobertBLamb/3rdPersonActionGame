@@ -39,7 +39,7 @@ public class DodgeSpecial : MonoBehaviour
         {
             dodgeDuration -= Time.deltaTime;
             thirdPersonMovement.MovePlayer();
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
 
         }
         dodgeDuration = dodgeDurationReset;

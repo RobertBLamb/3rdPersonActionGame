@@ -8,9 +8,9 @@ public class ClimbWall : MonoBehaviour
     public Transform wallHighEnough;
     public Transform wallTooHigh;
 
-    float castDist = .4f;
+    float castDist = .5f;
     public LayerMask isClimbable;
-    bool climbing;
+    public bool climbing;
     public float wallClimbAngle = 20;
 
     float rightAngle = 90;
@@ -36,6 +36,7 @@ public class ClimbWall : MonoBehaviour
             //TODO: optimize code later, maybe make method
             if (Physics.Raycast(wallHighEnough.position, wallHighEnough.forward, out hit, castDist, isClimbable))
             {
+                
                 if (Mathf.Abs((hit.transform.eulerAngles.y % rightAngle)  - (transform.eulerAngles.y % rightAngle)) <= wallClimbAngle)
                 {
                     if (Input.GetButtonDown("Interact"))
@@ -70,15 +71,16 @@ public class ClimbWall : MonoBehaviour
 
     public IEnumerator Climbing()
     {
+        climbing = true;
         thirdPersonMovement.anime.SetTrigger("Climb");
-        float i = .9f;
+        float i = .7f;
         while(i>0)
         {
             i -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        climbing = true;
+        
         thirdPersonMovement.animationLocked = true;
         while(hit.collider.bounds.max.y>thirdPersonMovement.controller.bounds.min.y)
         {

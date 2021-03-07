@@ -74,7 +74,7 @@ public class EnemyAttackCheck : MonoBehaviour
     {
         if(other.tag == "Player" && !attacking && !endingAtk)
         {
-            Debug.Log("ayaya");
+            //Debug.Log("oww");
             agent.speed = attackingSpeed;
             attacking = true;
         }

@@ -6,10 +6,13 @@ public class EnemyDamageManager : MonoBehaviour
 {
     public bool canHitstun;
     public bool damageable;
+    public bool deactivateLight;
 
     public EnemyHitStun enemyHitstun;
     public EnemyHealth enemyHealth;
+    public ModSkyBox modSkyBox;
     public Animator anime;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,7 +36,20 @@ public class EnemyDamageManager : MonoBehaviour
         if(damageable)
         {
             enemyHealth.TakeDmg(dmg);
+            //TODO: move this, makes extra code
+            if(enemyHealth.currentHealth-dmg<=0)
+            {
+                Debug.Log("gotem");
+                anime.SetTrigger("Die");
+            }
         }
+        if(deactivateLight)
+        {
+            RenderSettings.fogDensity = 0.009f;
+            modSkyBox.levelLight.color = modSkyBox.initalColor;
+            modSkyBox.gameObject.SetActive(false);
+        }
+
 
     }
 }
