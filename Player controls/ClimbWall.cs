@@ -8,7 +8,7 @@ public class ClimbWall : MonoBehaviour
     public Transform wallHighEnough;
     public Transform wallTooHigh;
 
-    float castDist = .5f;
+    float castDist = .6f;
     public LayerMask isClimbable;
     public bool climbing;
     public float wallClimbAngle = 20;
@@ -90,7 +90,7 @@ public class ClimbWall : MonoBehaviour
         while(moveForwardtime>0)
         {
             moveForwardtime -= Time.deltaTime;
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
             Vector3 moveDir = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * Vector3.forward;
             thirdPersonMovement.controller.Move(moveDir.normalized * climbSpeed * Time.deltaTime);
         }//move forward onto platform
